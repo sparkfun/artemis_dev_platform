@@ -4,6 +4,9 @@ FROM ubuntu:18.04
 # Separate the working area
 WORKDIR /app
 
+# Add ENV variables accessible everywhere
+ENV SDKPATH=/app/AmbiqSuiteSDK
+ENV COMMONPATH=/app/AmbiqSuiteSDK/boards_sfe/common
 
 # Add ARG variables to be used only in the build
 ARG BUILD_INFO=/build-info.txt

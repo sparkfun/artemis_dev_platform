@@ -41,6 +41,23 @@ make bootload_asb # builds to upload with the Ambiq Secure Bootloader (protected
 make bootload_svl # builds to upload with the SparkFun Variable Loader (can be overwritten + must be flashed to board first)
 ```
 
+## Building New Projects
+You can make your own projects from scratch. The main requirement is that the files are available through the bridge. Here's an example.
+
+In your host computer 
+* ```cd $ADP_NAME``` enter the repo root
+* ```PROJNAME=myproj``` choose a name for the project
+* ```mkdir -p $PROJNAME/gcc``` make a directory for your project w/ a gcc build folder
+* ```mkdir $PROJNAME/src``` make a src directory
+* ```cp AmbiqSuiteSDK/boards_sfe/common/tools_sfe/templates/makefile_template.mk $PROJNAME/gcc/Makefile```
+* ```cp AmbiqSuiteSDK/boards_sfe/common/tools_sfe/templates/main_template.c $PROJNAME/main.c```
+
+Then start the interactive container to run the build.
+
+In the container
+* 
+
+
 
 ## Uploading Built Binaries
 Since Docker does not standardize access to serial ports (COM on Windows and /de/tty* on *nix) you will need to use the uploader tools:
