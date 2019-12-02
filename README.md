@@ -55,7 +55,9 @@ In your host computer
 Then start the interactive container to run the build.
 
 In the container
-* 
+* ```BOARD=redboard_artemis``` choose the board to use
+* ```cd $PROJNAME/gcc```
+* ```make BOARDPATH=/app/AmbiqSuiteSDK/boards_sfe/$BOARD```
 
 
 
