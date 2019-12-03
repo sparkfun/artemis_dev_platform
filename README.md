@@ -77,7 +77,7 @@ Since Docker does not standardize access to serial ports (COM on Windows and /de
 ## Debugging with VSC
 You can use an in-chip-debugger like a SEGGER J-link to do step-by-step debugging of your code. One easy way to do this is to use the Visual Studio Code ```cortex-debug``` extension. You'll need to set up a [Launch Configuration](https://code.visualstudio.com/docs/editor/debugging#_launch-configurations) along these lines:
 
-``` json
+```
 {
     // Use IntelliSense to learn about possible attributes.
     // Hover to view descriptions of existing attributes.
