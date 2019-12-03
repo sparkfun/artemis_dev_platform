@@ -1,7 +1,5 @@
 #!/bin/bash
 
-echo "Testing"
-
 # tag the image based on the enclosing directory name
 BUILD_DIR=$(dirname $(readlink -f "$BASH_SOURCE"))
 TAG_NAME=$(basename $(dirname $BUILD_DIR))
