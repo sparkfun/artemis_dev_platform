@@ -1,1 +1,1 @@
-REM todo: implement batch script for Windows
+docker\ev.bat
