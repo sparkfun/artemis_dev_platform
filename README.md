@@ -9,48 +9,47 @@ Access to serial ports is not supported by Docker so after building you will nee
 
 ## Getting Started
 * Install [Docker](https://hub.docker.com/?overlay=onboarding)
-* ```cd ${WORK_DIR}``` navigate to your desired working location
-* ```ADP_NAME=artemis_dev_platform``` 
-  * choose a name for the repo
-  * this will also be the name of the Docker image
-  * the name of the variable does not matter as long as you are consistent
-  * optionally you might choose to make this a permanent fixture of your bash environment 
-* ```git clone --recursive https://github.com/sparkfun/artemis_dev_platform $ADP_NAME``` recursively clone this repo
-* ```cd $ADP_NAME``` enter the root of repo
-* ```./ev``` perform initial setup of environment (build Docker image)
+
+Bash | CMD Prompt | Description
+--- | --- | ---
+```cd ${WORK_DIR}``` | ```cd ${WORK_DIR}``` | navigate to your desired working location
+```ADP_NAME=artemis_dev_platform``` | ```set ADP_NAME=artemis_dev_platform``` | <div><div>choose a local name for this repo</div><ul><li>this will also be the name of the Docker image</li><li>the name of the variable does not matter as long as you are consistent</li><li>optionally you might choose to make this a permanent fixture of your bash environment</li></ul></div>
+```git clone --recursive https://github.com/sparkfun/artemis_dev_platform $ADP_NAME``` | ```git clone --recursive https://github.com/sparkfun/artemis_dev_platform %ADP_NAME%``` | recursively clone this repo
+```cd $ADP_NAME``` | ```cd %ADP_NAME%``` | enter the root of repo
+```./ev``` | ```ev.bat``` | perform initial setup of environment (build Docker image)
 
 ## Using the Interactive Container
 The interactive container is the easiest way to get started with the development platform.
 No matter what host OS you are using the container will present a standardized environment that you can use to build examples and custom projects.
-* ```./ev``` ensure that the image is ready
-* ```docker run -it --mount type=bind,source="$(pwd)",target=/app $ADP_NAME```
-  * ```-it``` start an interactive session with a bash shell
-  * ```--mount``` creates a bridge between the container and the host filesystems
-    * ```source="$(pwd)"``` specifies the current working directory as the host (source) side of the bridge
-    * ```target=/app``` specifies the ```/app``` dir in the container as the destination
-      * ```/app``` is the default/working directory in the container
-  * ```$ADP_NAME``` specifies which image to use and should have been set in **Getting Started**
+
+Bash | CMD Prompt | Description
+--- | --- | ---
+```./ev``` | ```ev.bat``` | ensure that the image is ready
+```docker run -it --mount type=bind,source="$(pwd)",target=/app $ADP_NAME``` | ```docker run -it --mount type=bind,source="%cd%",target=/app %ADP_NAME%``` | <div>start the interactive container</div><ul><li>```-it``` start an interactive session with a bash shell</li><li>```--mount``` creates a bridge between the container and the host filesystems<ul><li>```source="$(pwd)"``` specifies the current working directory as the host (source) side of the bridge</li><li>```target=/app``` specifies the ```/app``` dir in the container as the destination</li><li>```/app``` is the default/working directory in the container</li></ul></li><li>```$ADP_NAME``` specifies which image to use and should have been set in **Getting Started**</li></ul>
 
 ## Building Examples
 At the bash shell provided by the interactive container follow these instructions:
 ``` bash
-BOARD=redboard_artemis # or: edge, artemis_thing_plus, artemis_redboard_nano, artemis_redboard_atp etc...
-EXAMPLE=hello_world_uart # or: ble_cordio_tag, blinky, tensorflow_micro_speech or other applicable example for board
+BOARD=redboard_artemis                                    # or: edge, artemis_thing_plus, artemis_redboard_nano, artemis_redboard_atp etc...
+EXAMPLE=hello_world_uart                                  # or: ble_cordio_tag, blinky, tensorflow_micro_speech or other applicable example for board
 cd AmbiqSuiteSDK/boards_sfe/$BOARD/examples/$EXAMPLE/gcc  # go to the example Makefile
-make bootload_asb # builds to upload with the Ambiq Secure Bootloader (protected + always avaialable)
-make bootload_svl # builds to upload with the SparkFun Variable Loader (can be overwritten + must be flashed to board first)
+make bootload_asb                                         # builds to upload with the Ambiq Secure Bootloader (protected + always avaialable)
+make bootload_svl                                         # builds to upload with the SparkFun Variable Loader (can be overwritten + must be flashed to board first)
 ```
 
 ## Building New Projects
 You can make your own projects from scratch. The main requirement is that the files are available through the bridge. Here's an example.
 
 In your host computer 
-* ```cd $ADP_NAME``` enter the repo root
-* ```PROJNAME=myproj``` choose a name for the project
-* ```mkdir -p $PROJNAME/gcc``` make a directory for your project w/ a gcc build folder
-* ```mkdir $PROJNAME/src``` make a src directory
-* ```cp AmbiqSuiteSDK/boards_sfe/common/tools_sfe/templates/makefile_template.mk $PROJNAME/gcc/Makefile```
-* ```cp AmbiqSuiteSDK/boards_sfe/common/tools_sfe/templates/main_template.c $PROJNAME/main.c```
+
+Bash | CMD Prompt | Description
+--- | --- | ---
+```cd $ADP_NAME``` | ```cd %ADP_NAME%``` | enter the repo root
+```PROJNAME=myproj``` | ```set PROJNAME=myproj``` | choose a name for the project
+```mkdir -p $PROJNAME/gcc``` | ```mkdir -p %PROJNAME%\gcc``` | make a directory for your project w/ a gcc build folder
+```mkdir $PROJNAME/src``` | ```mkdir %PROJNAME%\src``` | make a src directory
+```cp AmbiqSuiteSDK/boards_sfe/common/tools_sfe/templates/makefile_template.mk $PROJNAME/gcc/Makefile``` | ```copy AmbiqSuiteSDK\boards_sfe\common\tools_sfe\templates\makefile_template.mk %PROJNAME%\gcc\Makefile``` | copy the makefile template
+```cp AmbiqSuiteSDK/boards_sfe/common/tools_sfe/templates/main_template.c $PROJNAME/src/main.c``` | ```copy AmbiqSuiteSDK\boards_sfe\common\tools_sfe\templates\main_template.c %PROJNAME%\src\main.c``` | copy the main template
 
 Then start the interactive container to run the build.
 
@@ -59,7 +58,7 @@ In the container
 * ```cd $PROJNAME/gcc```
 * ```make BOARDPATH=/app/AmbiqSuiteSDK/boards_sfe/$BOARD```
 
-
+The result will be a ```.bin``` file that appears on your host computer under the ```gcc``` directory of your project.
 
 ## Uploading Built Binaries
 Since Docker does not standardize access to serial ports (COM on Windows and /de/tty* on *nix) you will need to use the uploader tools:
