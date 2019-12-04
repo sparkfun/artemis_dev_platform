@@ -40,20 +40,12 @@ make bootload_svl                                         # builds to upload wit
 ## Building New Projects
 You can make your own projects from scratch. The main requirement is that the files are available through the bridge. Here's an example.
 
-In your host computer 
-
-Bash | CMD Prompt | Description
---- | --- | ---
-```cd $ADP_NAME``` | ```cd %ADP_NAME%``` | enter the repo root
-```PROJNAME=myproj``` | ```set PROJNAME=myproj``` | choose a name for the project
-```mkdir -p $PROJNAME/gcc``` | ```mkdir -p %PROJNAME%\gcc``` | make a directory for your project w/ a gcc build folder
-```mkdir $PROJNAME/src``` | ```mkdir %PROJNAME%\src``` | make a src directory
-```cp AmbiqSuiteSDK/boards_sfe/common/tools_sfe/templates/makefile_template.mk $PROJNAME/gcc/Makefile``` | ```copy AmbiqSuiteSDK\boards_sfe\common\tools_sfe\templates\makefile_template.mk %PROJNAME%\gcc\Makefile``` | copy the makefile template
-```cp AmbiqSuiteSDK/boards_sfe/common/tools_sfe/templates/main_template.c $PROJNAME/src/main.c``` | ```copy AmbiqSuiteSDK\boards_sfe\common\tools_sfe\templates\main_template.c %PROJNAME%\src\main.c``` | copy the main template
-
-Then start the interactive container to run the build.
-
-In the container
+In the container 
+* ```PROJNAME=myproj``` choose a name for the project
+* ```mkdir -p $PROJNAME/gcc``` make a directory for your project w/ a gcc build folder
+* ```mkdir $PROJNAME/src``` make a src directory
+* ```cp AmbiqSuiteSDK/boards_sfe/common/tools_sfe/templates/makefile_template.mk $PROJNAME/gcc/Makefile``` copy the makefile template
+* ```cp AmbiqSuiteSDK/boards_sfe/common/tools_sfe/templates/main_template.c $PROJNAME/src/main.c``` copy the main template
 * ```BOARD=redboard_artemis``` choose the board to use
 * ```cd $PROJNAME/gcc```
 * ```make BOARDPATH=/app/AmbiqSuiteSDK/boards_sfe/$BOARD```
