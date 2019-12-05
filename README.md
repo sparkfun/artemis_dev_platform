@@ -41,14 +41,23 @@ make bootload_svl                                         # builds to upload wit
 You can make your own projects from scratch. The main requirement is that the files are available through the bridge. Here's an example.
 
 In the container 
-* ```PROJNAME=myproj``` choose a name for the project
-* ```mkdir -p $PROJNAME/gcc``` make a directory for your project w/ a gcc build folder
-* ```mkdir $PROJNAME/src``` make a src directory
-* ```cp AmbiqSuiteSDK/boards_sfe/common/tools_sfe/templates/makefile_template.mk $PROJNAME/gcc/Makefile``` copy the makefile template
-* ```cp AmbiqSuiteSDK/boards_sfe/common/tools_sfe/templates/main_template.c $PROJNAME/src/main.c``` copy the main template
-* ```BOARD=redboard_artemis``` choose the board to use
-* ```cd $PROJNAME/gcc```
-* ```make BOARDPATH=/app/AmbiqSuiteSDK/boards_sfe/$BOARD```
+``` bash
+PROJNAME=myproj        # choose a name for the project
+mkdir -p $PROJNAME/gcc # make a directory for your project w/ a gcc build folder
+mkdir $PROJNAME/src    # make a src directory
+# copy the makefile template
+cp AmbiqSuiteSDK/boards_sfe/common/tools_sfe/templates/makefile_template.mk $PROJNAME/gcc/Makefile
+# copy the main template
+cp AmbiqSuiteSDK/boards_sfe/common/tools_sfe/templates/main_template.c $PROJNAME/src/main.c
+BOARD=redboard_artemis # choose the board to use
+cd $PROJNAME/gcc       # enter the gcc build directory
+# build the project by specifying which BSP to use
+make BOARDPATH=/app/AmbiqSuiteSDK/boards_sfe/$BOARD
+
+# alternately you can specify the bootloader that will be used - this selects the appropriate linker script
+make asb BOARDPATH=/app/AmbiqSuiteSDK/boards_sfe/$BOARD # build for Ambiq Secure Bootloader
+make svl BOARDPATH=/app/AmbiqSuiteSDK/boards_sfe/$BOARD # build for SparkFun Variable Loader
+```
 
 The result will be a ```.bin``` file that appears on your host computer under the ```gcc``` directory of your project.
 
