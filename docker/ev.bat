@@ -15,7 +15,7 @@ REM  only build the image if it isn't listed in the existing docker images
 docker image ls | findstr "\<%TAG_NAME%\>" >nul
 if /I "%ERRORLEVEL%" NEQ "0" (
   echo "Need to build Docker image '%TAG_NAME%'"
-  docker build -t %TAG_NAME% .
+  docker build -t %TAG_NAME% %BUILD_DIR%
 ) else (
   echo "Docker image '%TAG_NAME%' already exists"
 )
