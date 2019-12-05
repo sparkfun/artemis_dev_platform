@@ -28,6 +28,9 @@ RUN echo "Installing Packages" && \
   apt-get install -y --no-install-recommends \
   build-essential \
   git \
+  zip \
+  curl \
+  unzip \
   python3-pip \
   && rm -rf /var/lib/apt/lists/* && \
   echo ""
@@ -35,6 +38,9 @@ RUN echo "Installing Packages" && \
 RUN echo "Installed packages: " >> ${BUILD_INFO} && \
   make --version | head -n 1 >> ${BUILD_INFO} && \
   git --version >> ${BUILD_INFO} && \
+  curl --version >> ${BUILD_INFO} && \
+  which zip >> ${BUILD_INFO} && \
+  which unzip >> ${BUILD_INFO} && \
   python3 --version >> ${BUILD_INFO} && \
   pip3 --version >> ${BUILD_INFO} && \
   echo "" >> ${BUILD_INFO}
