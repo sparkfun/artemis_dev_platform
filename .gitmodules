@@ -1,3 +1,6 @@
 [submodule "AmbiqSuiteSDK"]
 	path = AmbiqSuiteSDK
 	url = https://github.com/sparkfun/AmbiqSuiteSDK
+[submodule "docker/sh-realpath"]
+	path = docker/sh-realpath
+	url = https://github.com/mkropat/sh-realpath
