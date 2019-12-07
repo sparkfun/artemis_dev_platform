@@ -4,3 +4,6 @@
 [submodule "docker/sh-realpath"]
 	path = docker/sh-realpath
 	url = https://github.com/mkropat/sh-realpath
+[submodule "sh-realpath"]
+	path = sh-realpath
+	url = https://github.com/mkropat/sh-realpath
