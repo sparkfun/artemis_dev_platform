@@ -9,6 +9,7 @@ Access to serial ports is not supported by Docker so after building you will nee
 
 ## Getting Started
 * Install [Docker](https://hub.docker.com/?overlay=onboarding)
+* When the Docker installer asks, you will need Linux containers
 
 Bash | CMD Prompt | Description
 --- | --- | ---
