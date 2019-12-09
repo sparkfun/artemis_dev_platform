@@ -1,7 +1,8 @@
 #!/bin/bash
+source sh-realpath/realpath.sh
 
 # tag the image based on the enclosing directory name
-BUILD_DIR=$(dirname $(readlink -f "$BASH_SOURCE"))
+BUILD_DIR=$(dirname $(realpath $BASH_SOURCE))
 TAG_NAME=$(basename $(dirname $BUILD_DIR))
 
 # only build the image if the tag name isn't listed as a docker image
@@ -14,5 +15,5 @@ else
   docker build -t $TAG_NAME $BUILD_DIR
 fi
 
-# run the image with any provded arguments
+# run the image with any provided arguments
 docker run --mount type=bind,source="$(pwd)",target=/app $TAG_NAME "$@"
