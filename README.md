@@ -13,7 +13,7 @@ Access to serial ports is not supported by Docker so after building you will nee
 
 Bash | CMD Prompt | Description
 --- | --- | ---
-```cd ${WORK_DIR}``` | ```cd ${WORK_DIR}``` | navigate to your desired working location
+```cd ${WORK_DIR}``` | ```cd %WORK_DIR%``` | navigate to your desired working location
 ```ADP_NAME=artemis_dev_platform``` | ```set ADP_NAME=artemis_dev_platform``` | <div><div>choose a local name for this repo</div><ul><li>this will also be the name of the Docker image</li><li>the name of the variable does not matter as long as you are consistent (but you do need to use ```snake_case```)</li><li>optionally you might choose to make this a permanent fixture of your bash environment</li></ul></div>
 ```git clone --recursive https://github.com/sparkfun/artemis_dev_platform $ADP_NAME``` | ```git clone --recursive https://github.com/sparkfun/artemis_dev_platform %ADP_NAME%``` | recursively clone this repo
 ```cd $ADP_NAME``` | ```cd %ADP_NAME%``` | enter the root of repo
