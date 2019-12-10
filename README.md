@@ -7,13 +7,14 @@ Based on concept from [**electron**vector.com](http://www.electronvector.com/blo
 A script is provided to run the development environment. 
 Access to serial ports is not supported by Docker so after building you will need a separate upload step
 
-## Getting Started
+## Install Docker
 * Install [Docker](https://hub.docker.com/?overlay=onboarding)
-* When the Docker installer asks, you will need Linux containers
-* You will need to allow access to your file system
-* The install may require you to log out and log back in or reboot your machine
+   * When the Docker installer asks, you will need Linux containers
+   * You will need to allow access to your file system
+   * The install may require you to log out and log back in or reboot your machine
 
-####Steps: 
+## Getting Started
+### Initial Steps: 
 * set your working directory environment variable
 * navigate to your working directory
 * set your ADP_NAME environment variable
@@ -47,7 +48,7 @@ cd %ADP_NAME%
 ev.bat
 ```
 
-## Using the Interactive Container
+### Using the Interactive Container
 The interactive container is the easiest way to get started with the development platform.
 No matter what host OS you are using the container will present a standardized environment that you can use to build examples and custom projects.
 
