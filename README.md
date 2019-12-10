@@ -34,8 +34,8 @@ At the bash shell provided by the interactive container follow these instruction
 BOARD=redboard_artemis                                    # or: edge, artemis_thing_plus, artemis_redboard_nano, artemis_redboard_atp etc...
 EXAMPLE=hello_world_uart                                  # or: ble_cordio_tag, blinky, tensorflow_micro_speech or other applicable example for board
 cd AmbiqSuiteSDK/boards_sfe/$BOARD/examples/$EXAMPLE/gcc  # go to the example Makefile
-make bootload_asb                                         # builds to upload with the Ambiq Secure Bootloader (protected + always avaialable)
-make bootload_svl                                         # builds to upload with the SparkFun Variable Loader (can be overwritten + must be flashed to board first)
+make asb                                         # builds to upload with the Ambiq Secure Bootloader (protected + always avaialable)
+make svl                                         # builds to upload with the SparkFun Variable Loader (can be overwritten + must be flashed to board first)
 ```
 
 ## Building New Projects
@@ -68,7 +68,7 @@ Since Docker does not standardize access to serial ports (COM on Windows and /de
 * Install Python3
 * Install Pip3
 * Install required Python modules
-  * ```pip3 install --upgrade pycrptodome```
+  * ```pip3 install --upgrade pycryptodome```
   * ```pip3 install --upgrade pyserial```
 * ```BINPATH=$path_to_compiled_binary```
 * Choose either the ASB or SVL uploader (match the option you used to compile)
