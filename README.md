@@ -52,10 +52,22 @@ ev.bat
 The interactive container is the easiest way to get started with the development platform.
 No matter what host OS you are using the container will present a standardized environment that you can use to build examples and custom projects.
 
-Bash | CMD Prompt | Description
---- | --- | ---
-```./ev``` | ```ev.bat``` | ensure that the image is ready
-```docker run -it --mount type=bind,source="$(pwd)",target=/app $ADP_NAME``` | ```docker run -it --mount type=bind,source="%cd%",target=/app %ADP_NAME%``` | <div>start the interactive container</div><ul><li>```-it``` start an interactive session with a bash shell</li><li>```--mount``` creates a bridge between the container and the host filesystems<ul><li>```source="$(pwd)"``` specifies the current working directory as the host (source) side of the bridge</li><li>```target=/app``` specifies the ```/app``` dir in the container as the destination</li><li>```/app``` is the default/working directory in the container</li></ul></li><li>```$ADP_NAME``` specifies which image to use and should have been set in **Getting Started**</li></ul>
+* -it starts an interactive session with a bash shell
+* --mount creates a bridge between the container and the host filesystems
+    * source="$(pwd)" specifies the current working directory as the host (source) side of the bridge
+    * target=/app specifies the /app dir in the container as the destination
+    * /app is the default/working directory in the container
+* $ADP_NAME specifies which image to use and should have been set in Getting Started
+
+Bash
+```
+    docker run -it --mount type=bind,source="$(pwd)",target=/app $ADP_NAME
+```
+
+Cmd Prompt
+```
+    docker run -it --mount type=bind,source="%cd%",target=/app %ADP_NAME%
+```
 
 ## Building Examples
 At the bash shell provided by the interactive container follow these instructions:
