@@ -13,13 +13,39 @@ Access to serial ports is not supported by Docker so after building you will nee
 * You will need to allow access to your file system
 * The install may require you to log out and log back in or reboot your machine
 
-Bash | CMD Prompt | Description
---- | --- | ---
-```cd ${WORK_DIR}``` | ```cd %WORK_DIR%``` | navigate to your desired working location
-```ADP_NAME=artemis_dev_platform``` | ```set ADP_NAME=artemis_dev_platform``` | <div><div>choose a local name for this repo</div><ul><li>this will also be the name of the Docker image</li><li>the name of the variable does not matter as long as you are consistent (but you do need to use ```snake_case```)</li><li>optionally you might choose to make this a permanent fixture of your bash environment</li></ul></div>
-```git clone --recursive https://github.com/sparkfun/artemis_dev_platform $ADP_NAME``` | ```git clone --recursive https://github.com/sparkfun/artemis_dev_platform %ADP_NAME%``` | recursively clone this repo
-```cd $ADP_NAME``` | ```cd %ADP_NAME%``` | enter the root of repo
-```./ev``` | ```ev.bat``` | perform initial setup of environment (build Docker image)
+####Steps: 
+* set your working directory environment variable
+* navigate to your working directory
+* set your ADP_NAME environment variable
+    * choose a local name for this repo 
+    * this will also be the name of the Docker image 
+    * the name of the variable does not matter as long as you are consistent (but you do need to use snake_case) 
+    * optionally you might choose to make this a permanent fixture of your bash environment
+* recursively clone this repo
+* enter the root of repo
+* perform initial setup of environment (build Docker image)
+
+
+Bash
+```
+WORK_DIR=< your_working_directory >
+cd ${WORK_DIR}
+ADP_NAME=artemis_dev_platform
+git clone --recursive https://github.com/sparkfun/artemis_dev_platform $ADP_NAME
+cd $ADP_NAME
+./ev
+```
+
+
+Cmd Prompt
+```
+set WORK_DIR=< your_working_directory >
+cd %WORK_DIR%
+set ADP_NAME=artemis_dev_platform
+git clone --recursive https://github.com/sparkfun/artemis_dev_platform %ADP_NAME%
+cd %ADP_NAME%
+ev.bat
+```
 
 ## Using the Interactive Container
 The interactive container is the easiest way to get started with the development platform.
