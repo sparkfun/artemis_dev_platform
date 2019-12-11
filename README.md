@@ -7,26 +7,67 @@ Based on concept from [**electron**vector.com](http://www.electronvector.com/blo
 A script is provided to run the development environment. 
 Access to serial ports is not supported by Docker so after building you will need a separate upload step
 
-## Getting Started
+## Install Docker
 * Install [Docker](https://hub.docker.com/?overlay=onboarding)
-* When the Docker installer asks, you will need Linux containers
+   * When the Docker installer asks, you will need Linux containers
+   * You will need to allow access to your file system
+   * The install may require you to log out and log back in or reboot your machine
 
-Bash | CMD Prompt | Description
---- | --- | ---
-```cd ${WORK_DIR}``` | ```cd %WORK_DIR%``` | navigate to your desired working location
-```ADP_NAME=artemis_dev_platform``` | ```set ADP_NAME=artemis_dev_platform``` | <div><div>choose a local name for this repo</div><ul><li>this will also be the name of the Docker image</li><li>the name of the variable does not matter as long as you are consistent (but you do need to use ```snake_case```)</li><li>optionally you might choose to make this a permanent fixture of your bash environment</li></ul></div>
-```git clone --recursive https://github.com/sparkfun/artemis_dev_platform $ADP_NAME``` | ```git clone --recursive https://github.com/sparkfun/artemis_dev_platform %ADP_NAME%``` | recursively clone this repo
-```cd $ADP_NAME``` | ```cd %ADP_NAME%``` | enter the root of repo
-```./ev``` | ```ev.bat``` | perform initial setup of environment (build Docker image)
+## Getting Started
+### Initial Steps: 
+* set your working directory environment variable
+* navigate to your working directory
+* set your ADP_NAME environment variable
+    * choose a local name for this repo 
+    * this will also be the name of the Docker image 
+    * the name of the variable does not matter as long as you are consistent (but you do need to use snake_case) 
+    * optionally you might choose to make this a permanent fixture of your bash environment
+* recursively clone this repo
+* enter the root of repo
+* perform initial setup of environment (build Docker image)
 
-## Using the Interactive Container
+
+Bash
+```
+WORK_DIR=< your_working_directory >
+cd ${WORK_DIR}
+ADP_NAME=artemis_dev_platform
+git clone --recursive https://github.com/sparkfun/artemis_dev_platform $ADP_NAME
+cd $ADP_NAME
+./ev
+```
+
+
+Cmd Prompt
+```
+set WORK_DIR=< your_working_directory >
+cd %WORK_DIR%
+set ADP_NAME=artemis_dev_platform
+git clone --recursive https://github.com/sparkfun/artemis_dev_platform %ADP_NAME%
+cd %ADP_NAME%
+ev.bat
+```
+
+### Using the Interactive Container
 The interactive container is the easiest way to get started with the development platform.
 No matter what host OS you are using the container will present a standardized environment that you can use to build examples and custom projects.
 
-Bash | CMD Prompt | Description
---- | --- | ---
-```./ev``` | ```ev.bat``` | ensure that the image is ready
-```docker run -it --mount type=bind,source="$(pwd)",target=/app $ADP_NAME``` | ```docker run -it --mount type=bind,source="%cd%",target=/app %ADP_NAME%``` | <div>start the interactive container</div><ul><li>```-it``` start an interactive session with a bash shell</li><li>```--mount``` creates a bridge between the container and the host filesystems<ul><li>```source="$(pwd)"``` specifies the current working directory as the host (source) side of the bridge</li><li>```target=/app``` specifies the ```/app``` dir in the container as the destination</li><li>```/app``` is the default/working directory in the container</li></ul></li><li>```$ADP_NAME``` specifies which image to use and should have been set in **Getting Started**</li></ul>
+* -it starts an interactive session with a bash shell
+* --mount creates a bridge between the container and the host filesystems
+    * source="$(pwd)" specifies the current working directory as the host (source) side of the bridge
+    * target=/app specifies the /app dir in the container as the destination
+    * /app is the default/working directory in the container
+* $ADP_NAME specifies which image to use and should have been set in Getting Started
+
+Bash
+```
+    docker run -it --mount type=bind,source="$(pwd)",target=/app $ADP_NAME
+```
+
+Cmd Prompt
+```
+    docker run -it --mount type=bind,source="%cd%",target=/app %ADP_NAME%
+```
 
 ## Building Examples
 At the bash shell provided by the interactive container follow these instructions:
@@ -34,8 +75,8 @@ At the bash shell provided by the interactive container follow these instruction
 BOARD=redboard_artemis                                    # or: edge, artemis_thing_plus, artemis_redboard_nano, artemis_redboard_atp etc...
 EXAMPLE=hello_world_uart                                  # or: ble_cordio_tag, blinky, tensorflow_micro_speech or other applicable example for board
 cd AmbiqSuiteSDK/boards_sfe/$BOARD/examples/$EXAMPLE/gcc  # go to the example Makefile
-make bootload_asb                                         # builds to upload with the Ambiq Secure Bootloader (protected + always avaialable)
-make bootload_svl                                         # builds to upload with the SparkFun Variable Loader (can be overwritten + must be flashed to board first)
+make asb                                         # builds to upload with the Ambiq Secure Bootloader (protected + always avaialable)
+make svl                                         # builds to upload with the SparkFun Variable Loader (can be overwritten + must be flashed to board first)
 ```
 
 ## Building New Projects
@@ -68,7 +109,7 @@ Since Docker does not standardize access to serial ports (COM on Windows and /de
 * Install Python3
 * Install Pip3
 * Install required Python modules
-  * ```pip3 install --upgrade pycrptodome```
+  * ```pip3 install --upgrade pycryptodome```
   * ```pip3 install --upgrade pyserial```
 * ```BINPATH=$path_to_compiled_binary```
 * Choose either the ASB or SVL uploader (match the option you used to compile)
