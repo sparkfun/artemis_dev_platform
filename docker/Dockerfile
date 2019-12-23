@@ -29,8 +29,10 @@ RUN echo "Installing Packages" && \
   build-essential \
   git \
   zip \
+  wget \
   curl \
   unzip \
+  python-pip \
   python3-pip \
   && rm -rf /var/lib/apt/lists/* && \
   echo ""
@@ -38,9 +40,12 @@ RUN echo "Installing Packages" && \
 RUN echo "Installed packages: " >> ${BUILD_INFO} && \
   make --version | head -n 1 >> ${BUILD_INFO} && \
   git --version >> ${BUILD_INFO} && \
+  which wget >> ${BUILD_INFO} && \
   curl --version >> ${BUILD_INFO} && \
   which zip >> ${BUILD_INFO} && \
   which unzip >> ${BUILD_INFO} && \
+  python --version >> ${BUILD_INFO} && \
+  pip --version >> ${BUILD_INFO} && \
   python3 --version >> ${BUILD_INFO} && \
   pip3 --version >> ${BUILD_INFO} && \
   echo "" >> ${BUILD_INFO}
@@ -58,4 +63,5 @@ ENV PATH="/bin/${ARMGCC_PATH}/bin:${PATH}"
 RUN echo "Installing Python Packages" && \
   pip3 install --upgrade pyserial && \
   pip3 install --upgrade pycryptodome && \
+  pip install --upgrade six && \
   echo ""
