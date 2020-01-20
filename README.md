@@ -114,8 +114,7 @@ Since Docker does not standardize access to serial ports (COM on Windows and /de
 * ```BINPATH=$path_to_compiled_binary```
 * Choose either the ASB or SVL uploader (match the option you used to compile)
   * ```python3 AmbiqSuiteSDK/boards_sfe/common/tools_sfe/artemis/artemis_svl.py -f $BINPATH -b $BAUD_RATE port $SERIAL_PORT```
-  * ```python3 AmbiqSuiteSDK/boards_sfe/common/tools_sfe/ambiq/ambiq_bin2board.py && \```
-    ```--bin $BINPATH --load-address-blob 0x20000 --magic-num 0xCB -o ./temporary --version 0x0 --load-address-wired 0xC000 -i 6 --options 0x1 -b $BAUD_RATE -port $SERIAL_PORT -r 2```
+  * ```python3 AmbiqSuiteSDK/boards_sfe/common/tools_sfe/ambiq/ambiq_bin2board.py --bin $BINPATH --load-address-blob 0x20000 --magic-num 0xCB -o ./temporary --version 0x0 --load-address-wired 0xC000 -i 6 --options 0x1 -b $BAUD_RATE -port $SERIAL_PORT -r 2```
 
 ## Debugging with VSC
 You can use an in-chip-debugger like a SEGGER J-link to do step-by-step debugging of your code. One easy way to do this is to use the Visual Studio Code ```cortex-debug``` extension. You'll need to set up a [Launch Configuration](https://code.visualstudio.com/docs/editor/debugging#_launch-configurations) along these lines:
