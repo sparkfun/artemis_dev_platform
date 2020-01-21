@@ -7,3 +7,5 @@ projects
 # Individual Files
 temp__OTA_blob.bin
 temp__Wired_OTA_blob.bin
+temporary_OTA_blob.bin
+temporary_Wired_OTA_blob.bin
