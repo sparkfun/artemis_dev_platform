@@ -15,6 +15,7 @@ ARG BUILD_INFO=/build-info.txt
 ARG ARMGCC_URL=https://developer.arm.com/-/media/Files/downloads/gnu-rm/9-2019q4/gcc-arm-none-eabi-9-2019-q4-major-x86_64-linux.tar.bz2
 ARG ARMGCC_DWNLD_MATCH=gcc-arm-none-eabi*.tar.bz2
 ARG ARMGCC_VERSION=gcc-arm-none-eabi-9-2019-q4-major
+ARG ARMGCC_PATH="/bin/${ARMGCC_VERSION}/bin"
 
 # Create a build log
 RUN touch ${BUILD_INFO} && \
