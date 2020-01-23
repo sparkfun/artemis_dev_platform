@@ -33,7 +33,11 @@ RUN echo "Installing Packages" && \
   curl \
   unzip \
   python-pip \
+  python-setuptools \
+  python-dev \
   python3-pip \
+  python3-setuptools \
+  mercurial \
   && rm -rf /var/lib/apt/lists/* && \
   echo ""
 
@@ -41,7 +45,7 @@ RUN echo "Installed packages: " >> ${BUILD_INFO} && \
   make --version | head -n 1 >> ${BUILD_INFO} && \
   git --version >> ${BUILD_INFO} && \
   which wget >> ${BUILD_INFO} && \
-  curl --version >> ${BUILD_INFO} && \
+  curl --version | head -n 1 >> ${BUILD_INFO} && \
   which zip >> ${BUILD_INFO} && \
   which unzip >> ${BUILD_INFO} && \
   python --version >> ${BUILD_INFO} && \
@@ -57,7 +61,12 @@ RUN echo "Installing ARM Cross Compiler" && \
   rm -rf /tmp/* && \
   echo ""
 
-ENV PATH="/bin/${ARMGCC_PATH}/bin:${PATH}"
+ENV PATH="${ARMGCC_PATH}:${PATH}"
+
+# Install mbed-cli
+RUN echo "Installing mbed-cli" && \
+  pip install mbed-cli && \
+  echo "mbed-cli $(mbed --version)" >> ${BUILD_INFO}
 
 # Install Python Packages
 RUN echo "Installing Python Packages" && \
