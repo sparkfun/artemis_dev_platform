@@ -61,7 +61,8 @@ No matter what host OS you are using the container will present a standardized e
 
 Bash
 ```
-    docker run -it --mount type=bind,source="$(pwd)",target=/app $ADP_NAME
+    cd $ADP_NAME  # if you haven't already entered the artemis_dev_platform root
+    docker run -it --mount type=bind,source="$(pwd)",target=/app $(basename $(pwd))
 ```
 
 Cmd Prompt
