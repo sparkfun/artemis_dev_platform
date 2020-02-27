@@ -73,11 +73,13 @@ Cmd Prompt
 ## Building Examples
 At the bash shell provided by the interactive container follow these instructions:
 ``` bash
-BOARD=redboard_artemis                                    # or: edge, artemis_thing_plus, artemis_redboard_nano, artemis_redboard_atp etc...
-EXAMPLE=hello_world_uart                                  # or: ble_cordio_tag, blinky, tensorflow_micro_speech or other applicable example for board
-cd AmbiqSuiteSDK/boards_sfe/$BOARD/examples/$EXAMPLE/gcc  # go to the example Makefile
-make asb                                         # builds to upload with the Ambiq Secure Bootloader (protected + always avaialable)
-make svl                                         # builds to upload with the SparkFun Variable Loader (can be overwritten + must be flashed to board first)
+cd /app/                          # begin at the app root space
+BOARD=redboard_artemis_atp        # or: edge, artemis_thing_plus, artemis_redboard_nano, artemis_redboard_atp etc...
+EXAMPLE=hello_world_uart          # or: ble_freertos_tag, blinky, tensorflow_micro_speech or other applicable example for board
+cd AmbiqSuiteSDK/boards_sfe/common/examples/$EXAMPLE/gcc # go to the example Makefile
+make BOARD=$BOARD                                             # builds for default bootloader (equivalent to 'make asb')
+make BOARD=$BOARD asb                                         # builds for Ambiq Secure Bootloader (protected + always avaialable)
+make BOARD=$BOARD svl                                         # builds for SparkFun Variable Loader (can be overwritten + must be flashed to board first)
 ```
 
 ## Building New Projects
